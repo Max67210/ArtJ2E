@@ -17,6 +17,7 @@ public class Connexion {
 
     private Connection conn;
     private Statement state = null;
+    private String requete;
 
     public Connexion() {
         try {
@@ -31,12 +32,22 @@ public class Connexion {
         conn.close();
     }
 
-    public void AjouterRessource(String unTitre, String uneCategorie) {
+    public void ajouterRessource(String unTitre, String uneCategorie) {
         try {
-            String sql = "INSERT INTO ressources (titre, categorie) values (?, ?)";
-            PreparedStatement statement = conn.prepareStatement(sql);
+            requete = "INSERT INTO ressources (titre, categorie) values (?, ?)";
+            PreparedStatement statement = conn.prepareStatement(requete);
             statement.setString(1, unTitre);
             statement.setString(2, uneCategorie);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void inscriptionUserBDD (String unLogin, String unPassword) {
+        try {
+            requete = "INSERT INTO `user`(`userName`, `userPass`) VALUES ('"+unLogin+"','"+unPassword+"')";
+            PreparedStatement statement = conn.prepareStatement(requete);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
