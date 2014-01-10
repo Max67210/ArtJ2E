@@ -46,7 +46,6 @@ public class Connexion {
     
     public void inscriptionUserBDD (String unLogin, String unPassword) {
         try {
-            System.out.println("ici");
             requete = "INSERT INTO `user`(`userName`, `userPass`) VALUES ('"+unLogin+"','"+unPassword+"')";
             PreparedStatement statement = conn.prepareStatement(requete);
             statement.executeUpdate();
