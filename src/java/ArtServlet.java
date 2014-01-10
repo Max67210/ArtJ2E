@@ -18,17 +18,12 @@ public class ArtServlet extends HttpServlet {
         
         String formulaire_origine = request.getParameter("div_type_form");
         try {
-            
-            System.out.println("ici\n");
             if (formulaire_origine.equals("inscription")) {//inscription en Base
-                String insert = "";
+
                 String nom = request.getParameter("Login_insc");
                 String pass = request.getParameter("mdp_insc");
-//                out.print(nom);
-//                out.print(pass);
 
-//                insert ="INSERT INTO `user`(`userName`, `userPass`) VALUES ('"+nom+"','"+pass+"')";
-//                state.executeUpdate(insert);
+                connect.inscriptionUserBDD(nom, pass);
             } else if (formulaire_origine.equals("connexion")) { // connexion de l'utilisateur
                 out.print("connexion");
 
@@ -49,7 +44,7 @@ public class ArtServlet extends HttpServlet {
                     // obtains input stream of the upload file
                     inputStream = filePart.getInputStream();
            
-                    connect.AjouterRessource("test", "cat");
+                    connect.ajouterRessource("test", "cat");
                 }
             } else {
                 out.print("variable passer:" + formulaire_origine);
