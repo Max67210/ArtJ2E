@@ -22,8 +22,8 @@ public class ArtServlet extends HttpServlet {
 
                 String nom = request.getParameter("Login_insc");
                 String pass = request.getParameter("mdp_insc");
-
                 connect.inscriptionUserBDD(nom, pass);
+                
             } else if (formulaire_origine.equals("connexion")) { // connexion de l'utilisateur
                 out.print("connexion");
 
