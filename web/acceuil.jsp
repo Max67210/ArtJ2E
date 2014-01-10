@@ -18,7 +18,6 @@ http://www.codejava.net/coding/upload-files-to-database-servlet-jsp-mysql
     <body>
         <link rel="stylesheet" type="text/css" href="css/css_acceuil.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="JS/acceuil.js"></script>
 
         <!-- Inclusion page Header.jsp --!>
         <jsp:directive.include file="/JSP/Header.jsp"/>

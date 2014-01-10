@@ -41,6 +41,10 @@ html,body
 {
    text-align: right;
 }
+#_insc{
+    text-align: right;
+}
+
 #div_form_connexion img,#div_form_inscription img,#div_form_ajout_image img
 {
    width: 15px;

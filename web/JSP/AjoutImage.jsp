@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script type="text/javascript" src="JS/Ajout_image.js"></script>
     </head>
     <body>
         <!-- Ajout d'image -->
