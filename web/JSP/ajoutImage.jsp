@@ -15,6 +15,7 @@
     <form action="servlet/ArtServlet" method="post" enctype="multipart/form-data">
         <input type="file" name="file" />
         <br />
+        Nom de l'image : <input type="text" name="nomImage"/> <br/>
         <select name="categorie">
             <option>Dark-Fantasy</option>
             <option>Humain</option>

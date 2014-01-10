@@ -39,8 +39,12 @@ public class ArtServlet extends HttpServlet {
 
                 // obtains the upload file part in this multipart request
                 Part filePart = request.getPart("file");
+                String nomImage = request.getParameter("nomImage");
+                String nomCateg = request.getParameter("categorie");
+                // à tester
+                out.print(nomImage);
+                out.print(nomCateg);
                 if (filePart != null) {
-                    
                     
                     
                     // prints out some information for debugging
@@ -50,6 +54,7 @@ public class ArtServlet extends HttpServlet {
 
                     // obtains input stream of the upload file
                     inputStream = filePart.getInputStream();
+                    
            
                     connect.ajouterRessource("test", "cat");
                 }
