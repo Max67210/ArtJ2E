@@ -18,6 +18,7 @@ public class Connexion {
     private Connection conn;
     private Statement state = null;
     private String requete;
+    private PreparedStatement statement;
 
     public Connexion() {
         try {
@@ -35,7 +36,7 @@ public class Connexion {
     public void ajouterRessource(String unTitre, String uneCategorie) {
         try {
             requete = "INSERT INTO ressources (titre, categorie) values (?, ?)";
-            PreparedStatement statement = conn.prepareStatement(requete);
+            statement = conn.prepareStatement(requete);
             statement.setString(1, unTitre);
             statement.setString(2, uneCategorie);
             statement.executeUpdate();
@@ -47,8 +48,17 @@ public class Connexion {
     public void inscriptionUserBDD (String unLogin, String unPassword) {
         try {
             requete = "INSERT INTO `user`(`userName`, `userPass`) VALUES ('"+unLogin+"','"+unPassword+"')";
-            PreparedStatement statement = conn.prepareStatement(requete);
+            statement = conn.prepareStatement(requete);
             statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void connexionUserBDD (String unLogin, String unPassword) {
+        try {
+            requete = "SELECT * FROM `user` WHERE userName='"+unLogin+"' AND userPass='"+unPassword+"')";
+            statement = conn.prepareStatement(requete);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

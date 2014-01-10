@@ -17,28 +17,31 @@ http://www.codejava.net/coding/upload-files-to-database-servlet-jsp-mysql
 <html>
     <body>
         <link rel="stylesheet" type="text/css" href="css/css_acceuil.css">
+        <link rel="stylesheet" type="text/css" href="css/header.css">
+        <link rel="stylesheet" type="text/css" href="css/navigation.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-        <!-- Inclusion page Header.jsp --!>
-        <jsp:directive.include file="/JSP/Header.jsp"/>
+        <!-- Inclusion page header.jsp --!>
+        <jsp:directive.include file="/JSP/header.jsp"/>
         
-        <!-- Inclusion page Menu.jsp --!>
-        <jsp:directive.include file="/JSP/Menu.jsp"/>
+        <!-- Inclusion page menu.jsp --!>
+        <jsp:directive.include file="/JSP/menu.jsp"/>
         
-        <!-- Inclusion page Contenu.jsp --!>
-        <jsp:directive.include file="/JSP/Contenu.jsp"/>
+        <!-- Inclusion page contenu.jsp --!>
+        <jsp:directive.include file="/JSP/contenu.jsp"/>
 
-        <!-- Inclusion page Footer.jsp --!>
-        <jsp:directive.include file="/JSP/Footer.jsp"/>
+        <!-- Inclusion page footer.jsp --!>
+        <jsp:directive.include file="/JSP/footer.jsp"/>
        
-        <!-- Inclusion page Connexion.jsp --!>
-        <jsp:directive.include file="/JSP/Connexion.jsp"/>
+        <!-- Inclusion page connexion.jsp --!>
+        <jsp:directive.include file="/JSP/connexion.jsp"/>
         
-        <!-- Inclusion page Inscription.jsp --!>
-        <jsp:directive.include file="/JSP/Inscription.jsp"/>
+        <!-- Inclusion page inscription.jsp --!>
+        <jsp:directive.include file="/JSP/inscription.jsp"/>
 
-        <!-- Inclusion page AjoutImage.jsp --!>
-        <jsp:directive.include file="/JSP/AjoutImage.jsp"/>
+        <!-- Inclusion page ajoutImage.jsp --!>
+        <jsp:directive.include file="/JSP/ajoutImage.jsp"/>
 
         
     </body>
