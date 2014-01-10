@@ -1,4 +1,5 @@
 
+import ges_bdd.Connexion;
 import java.io.*;
 import java.sql.*;
 import javax.servlet.ServletException;
@@ -7,27 +8,24 @@ import ges_bdd.uneConnexion;
 
 public class ArtServlet extends HttpServlet {
 
-    private Connection conn;
-    private Statement state = null;
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //uneConnexion.getInstance();
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
+        response.setContentType("text/html");
+        Connexion connect = new Connexion(); // instanciation et ouverture de la base de donnée.
+        
+        
         String formulaire_origine = request.getParameter("div_type_form");
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/artj2e", "root", "");      // Connexion a la BDD:
-//            state = conn.createStatement();         //Création d'un objet Statement
-
+            
+            System.out.println("ici\n");
             if (formulaire_origine.equals("inscription")) {//inscription en Base
                 String insert = "";
                 String nom = request.getParameter("Login_insc");
                 String pass = request.getParameter("mdp_insc");
 //                out.print(nom);
 //                out.print(pass);
-                out.print(conn);
 
 //                insert ="INSERT INTO `user`(`userName`, `userPass`) VALUES ('"+nom+"','"+pass+"')";
 //                state.executeUpdate(insert);
@@ -40,6 +38,9 @@ public class ArtServlet extends HttpServlet {
                 // obtains the upload file part in this multipart request
                 Part filePart = request.getPart("file");
                 if (filePart != null) {
+                    
+                    
+                    
                     // prints out some information for debugging
                     System.out.println(filePart.getName());
                     System.out.println(filePart.getSize());
@@ -47,19 +48,8 @@ public class ArtServlet extends HttpServlet {
 
                     // obtains input stream of the upload file
                     inputStream = filePart.getInputStream();
-                    // constructs SQL statement
-                    String sql = "INSERT INTO ressources (titre, categorie) values (?, ?)";
-                    PreparedStatement statement = conn.prepareStatement(sql);
-                    statement.setString(1, "test");
-                    statement.setString(2, "cat");
-
-                    /*if (inputStream != null) {
-                        // fetches input stream of the upload file for the blob column
-                        statement.setBlob(3, inputStream);
-                    }
-*/
-                    // sends the statement to the database server
-                    statement.executeUpdate();
+           
+                    connect.AjouterRessource("test", "cat");
                 }
             } else {
                 out.print("variable passer:" + formulaire_origine);
@@ -70,10 +60,10 @@ public class ArtServlet extends HttpServlet {
             out.print("erreur enregistrement");
             ex.printStackTrace();
         } finally {
-            if (conn != null) {
+            if (connect != null) {
                 // closes the database connection
                 try {
-                    conn.close();
+                    connect.close();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

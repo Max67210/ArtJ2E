@@ -56,7 +56,7 @@ http://www.codejava.net/coding/upload-files-to-database-servlet-jsp-mysql
 
         <!-- LA DIV MAIN -->
         <div id="div_main">
-            <p>div du main</p>
+            <p></p>
         </div>
         <!-- LE FOOTER -->
         <div id="footer_acceuil">
