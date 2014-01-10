@@ -6,6 +6,7 @@ package ges_bdd;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -19,6 +20,8 @@ public class Connexion {
     private Statement state = null;
     private String requete;
     private PreparedStatement statement;
+    private ResultSet rs;
+    private boolean btrouver =false;
 
     public Connexion() {
         try {
@@ -55,12 +58,18 @@ public class Connexion {
         }
     }
     
-    public void connexionUserBDD (String unLogin, String unPassword) {
+    public boolean connexionUserBDD (String unLogin, String unPassword) {
         try {
-            requete = "SELECT * FROM `user` WHERE userName='"+unLogin+"' AND userPass='"+unPassword+"')";
+            requete = "SELECT * FROM `user` WHERE userName='"+unLogin+"' AND userPass='"+unPassword+"'";
             statement = conn.prepareStatement(requete);
+            rs = statement.executeQuery();
+            if (rs != null) {
+                btrouver = true;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            return btrouver;
         }
     }
 }

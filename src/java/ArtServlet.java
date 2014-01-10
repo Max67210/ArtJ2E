@@ -27,6 +27,12 @@ public class ArtServlet extends HttpServlet {
             } else if (formulaire_origine.equals("connexion")) { // connexion de l'utilisateur
                 String login = request.getParameter("Login_connexion");
                 String mdp = request.getParameter("mdp_connexion");
+                if (connect.connexionUserBDD(login, mdp)) {
+                    out.print("connexion utilisateur réussi");
+                }
+                else {
+                    out.print("Login/mot de passe incorrect");
+                }
 
             } else if (formulaire_origine.equals("ajout_image")) {
                 InputStream inputStream = null;
