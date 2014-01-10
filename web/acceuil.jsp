@@ -23,41 +23,15 @@ http://www.codejava.net/coding/upload-files-to-database-servlet-jsp-mysql
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript" src="JS/acceuil.js"></script>
 
-        <!-- LE HEADER -->
-        <div id="div_head_general">
-            <ul>
-                <li><a id="link_connexion">Login</a></li>
-                <li><a id="link_enregistrement">Enregistrement</a></li>
-            </ul>
-        </div>
-        <!-- LA NAVIGATION -->
-        <div id="div_navigation">
-            <h3>Navigation</h3>
-            <div class="separator_nav" ></div>
-            <p> recherche une catégorie</p>
-            <ul>
-                <form action="servlet/resultat" method="post">
-                    <select name="categorie">
-                        <option>Dark-Fantasy</option>
-                        <option>Humain</option>
-                        <option>Delorien</option>
-                        <option>Akwalien</option>
-                        <option>Elarien</option>
-                        <option>Paysage-Fantasy</option>
-                    </select>
-                    <input type="submit" value="GO!"/>
-                </form>
-            </ul>
-            <div class="separator_nav" ></div>
-            <ul>
-                <li><a id="link_add_picture">Ajouter une image</a></li>
-            </ul>
-        </div>
-
-        <!-- LA DIV MAIN -->
-        <div id="div_main">
-            <p></p>
-        </div>
+        <!-- Inclusion page Header.jsp --!>
+        <jsp:directive.include file="/JSP/Header.jsp"/>
+        
+        <!-- Inclusion page Menu.jsp --!>
+        <jsp:directive.include file="/JSP/Menu.jsp"/>
+        
+                <!-- Inclusion page Contenu.jsp --!>
+        <jsp:directive.include file="/JSP/Contenu.jsp"/>
+       
         <!-- LE FOOTER -->
         <div id="footer_acceuil">
             <p>Ce site d'entrainement à la programmation JSP,SERVLET,HTML,CSS,JS,...  </br> par Messmer valentin  et Lefort Maxime </br> les images presentes sur le sites sont des images internet et HOK.</p>
