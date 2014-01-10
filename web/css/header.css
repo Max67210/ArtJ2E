@@ -1,0 +1,29 @@
+#div_head_general
+{
+    margin-bottom: 2%;
+    text-align: right;
+    background-color: #BFC4BE;
+    border-bottom: 10px solid black;
+}
+#div_head_general ul
+{
+    list-style: none;
+    margin: 0;
+    margin-right: 20px;
+
+}
+#div_head_general ul li
+{
+    display: inline;
+    margin-right: 20px;
+}
+#div_head_general ul li a
+{
+    color: #000;
+    text-decoration: none;
+}
+#div_head_general ul li a:hover
+{
+    color: #353535;
+    font-weight : bold;
+}

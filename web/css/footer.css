@@ -1,0 +1,18 @@
+#footer_acceuil
+{
+    color: #000;
+    margin-top: 100px;
+    height: 80px;
+    bottom: 0px;
+    width: 100%;
+    position: relative;
+    background-color: #BFC4BE;
+    border-top: 10px solid black;
+    text-align: center;
+}
+#footer_acceuil p
+{
+    margin: 0px;
+    margin-top: 10px;
+    padding: 0px;
+}

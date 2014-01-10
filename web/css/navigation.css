@@ -1,0 +1,44 @@
+#div_navigation
+{
+    z-index: 1;
+    position: fixed;
+    margin-left: 2%;
+    color: #000;
+    padding: 0.5%;
+   background-color: #BFC4BE;
+    border: 8px solid black;
+    border-radius: 10px;
+}
+.separator_nav
+{
+    height: 5px;
+    background-color: black;
+}
+#div_navigation h3
+{
+    margin: 0px;
+}
+#div_navigation ul
+{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#div_navigation ul li
+{
+    display: block;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+#div_navigation ul li a
+{
+    text-decoration: none;
+    color: #000;
+}
+#div_navigation ul li a:hover
+{
+    cursor: pointer;
+    text-decoration: underline;
+}
