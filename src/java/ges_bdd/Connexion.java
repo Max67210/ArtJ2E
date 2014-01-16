@@ -38,10 +38,8 @@ public class Connexion {
 
     public void ajouterRessource(String unTitre, String uneCategorie) {
         try {
-            requete = "INSERT INTO ressources (titre, categorie) values (?, ?)";
+            requete = "INSERT INTO `ressources` (`titre`, `categorie`) VALUES ('"+unTitre+"','"+uneCategorie+"')";
             statement = conn.prepareStatement(requete);
-            statement.setString(1, unTitre);
-            statement.setString(2, uneCategorie);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();

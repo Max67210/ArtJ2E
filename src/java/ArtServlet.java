@@ -4,7 +4,6 @@ import java.io.*;
 import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import ges_bdd.uneConnexion;
 
 public class ArtServlet extends HttpServlet {
 
@@ -17,6 +16,7 @@ public class ArtServlet extends HttpServlet {
         
         
         String formulaire_origine = request.getParameter("div_type_form");
+        out.print(formulaire_origine);
         try {
             if (formulaire_origine.equals("inscription")) {//inscription en Base
 
@@ -35,7 +35,9 @@ public class ArtServlet extends HttpServlet {
                 }
 
             } else if (formulaire_origine.equals("ajout_image")) {
-                InputStream inputStream = null;
+                System.out.println("test");
+                connect.ajouterRessource("test", "cat");
+                //InputStream inputStream = null;
 
                 // obtains the upload file part in this multipart request
                 Part filePart = request.getPart("file");
@@ -44,6 +46,10 @@ public class ArtServlet extends HttpServlet {
                 // à tester
                 out.print(nomImage);
                 out.print(nomCateg);
+                String format = "yyyy-MM-dd"; 
+
+                java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format ); 
+                java.util.Date date = new java.util.Date(); 
                 if (filePart != null) {
                     
                     
@@ -53,27 +59,27 @@ public class ArtServlet extends HttpServlet {
                     System.out.println(filePart.getContentType());
 
                     // obtains input stream of the upload file
-                    inputStream = filePart.getInputStream();
+                    //inputStream = filePart.getInputStream();
                     
            
-                    connect.ajouterRessource("test", "cat");
+                    connect.ajouterRessource(nomImage, nomCateg);
                 }
             } else {
                 out.print("variable passer:" + formulaire_origine);
             }
 //             state.close();
 //             conn.close();
-        } catch (Exception ex) {                                // erreur avec la base de donnée
+        } catch (Exception ex) {                                
             out.print("erreur enregistrement");
             ex.printStackTrace();
         } finally {
             if (connect != null) {
                 // closes the database connection
-                try {
-                    connect.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+//                try {
+//                    connect.close();
+//                } catch (SQLException ex) {
+//                    ex.printStackTrace();
+//                }
             }
         }
     }
