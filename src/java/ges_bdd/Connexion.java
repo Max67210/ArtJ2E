@@ -70,4 +70,23 @@ public class Connexion {
             return btrouver;
         }
     }
+    
+    public boolean userExiste(String unLogin){
+        boolean existe = false;
+         try {
+            requete = "SELECT COUNT(*) FROM `user` WHERE userName='"+unLogin+"'";
+            statement = conn.prepareStatement(requete);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                int count =rs.getInt(1);
+                if(count > 0){
+                    existe = true;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            return existe;
+        }
+    }
 }

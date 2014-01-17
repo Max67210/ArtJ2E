@@ -16,13 +16,22 @@ public class ArtServlet extends HttpServlet {
         
         
         String formulaire_origine = request.getParameter("div_type_form");
-        out.print(formulaire_origine);
+//        out.print(formulaire_origine);
+        
         try {
             if (formulaire_origine.equals("inscription")) {//inscription en Base
-
-                String nom = request.getParameter("Login_insc");
-                String pass = request.getParameter("mdp_insc");
-                connect.inscriptionUserBDD(nom, pass);
+                
+                String login = request.getParameter("login");
+                System.out.println(login);
+                
+                boolean bol =  connect.userExiste(login);
+                System.out.println(bol);
+                if(bol){
+                    
+                    out.print("utilisateur deja existant");
+                }else{
+                    out.print("bienvenue "+login);
+                }
                 
             } else if (formulaire_origine.equals("connexion")) { // connexion de l'utilisateur
                 String login = request.getParameter("Login_connexion");
