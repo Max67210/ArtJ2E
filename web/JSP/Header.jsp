@@ -6,19 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="css/header.css">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <!-- LE HEADER -->
-        <div id="div_head_general">
-            <ul>
-                <li><a id="link_connexion">Login</a></li>
-                <li><a id="link_enregistrement">Enregistrement</a></li>
-            </ul>
-        </div>
-    </body>
-</html>
+
+<!-- LE HEADER -->
+<div id="div_head_general">
+    <ul>
+        <li><a id="link_connexion">Login</a></li>
+        <li><a id="link_enregistrement">Enregistrement</a></li>
+    </ul>
+</div>
+

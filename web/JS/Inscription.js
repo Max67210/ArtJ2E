@@ -33,7 +33,7 @@ $(document).ready(function() {
                 $("#mdp_conf").css("border", "2px solid red");
             }
         }
-        gestionBouton()
+        gestionBouton();
     });
 
     $("#mdp_conf").keyup(function() {
@@ -52,7 +52,7 @@ $(document).ready(function() {
                 $("#mdp_conf").css("border", "2px solid red");
             }
         }
-        gestionBouton()
+        gestionBouton();
     });
 
     var gestionBouton = function()
@@ -68,6 +68,25 @@ $(document).ready(function() {
             $("#btn_submit").attr("disabled", "disabled");
             $("#btn_submit").attr('value', 'Merci de remplir les champs');
         }
-    }
+    };
+
+    $('#btn_submit').on('click', function() {
+        alert('ddz');
+        $.ajax({
+            type: "POST",
+            url: "servlet/ArtServlet",
+            data: {
+                login: $("#Login_insc").val(),
+                pass:  $("#mdp_insc").val(),
+                div_type_form: "inscription"
+            },
+            success: function(data)
+           {
+               $("#error_insc").text(data);
+           }
+        });
+        return false;
+    });
+    
 });
   

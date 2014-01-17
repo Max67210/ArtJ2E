@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="tag" uri="/WEB-INF/tlds/tabLib.tld" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,19 +19,8 @@
             <h3>Navigation</h3>
             <div class="separator_nav" ></div>
             <p> recherche une catégorie</p>
-            <ul>
-                <form action="servlet/resultat" method="post">
-                    <select name="categorie">
-                        <option>Dark-Fantasy</option>
-                        <option>Humain</option>
-                        <option>Delorien</option>
-                        <option>Akwalien</option>
-                        <option>Elarien</option>
-                        <option>Paysage-Fantasy</option>
-                    </select>
-                    <input type="submit" value="GO!"/>
-                </form>
-            </ul>
+            <tag:genreSelect genre="select"/>
+            
             <div class="separator_nav" ></div>
             <ul>
                 <li><a id="link_add_picture">Ajouter une image</a></li>
