@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,13 +37,52 @@ public class Connexion {
         conn.close();
     }
 
-    public void ajouterRessource(String unTitre, String uneCategorie) {
+    public void ajouterRessource(String unTitre, String uneCategorie, String url, String deposit) {
         try {
-            requete = "INSERT INTO `ressources` (`titre`, `categorie`) VALUES ('"+unTitre+"','"+uneCategorie+"')";
+            requete = "INSERT INTO `ressources` (`titre`, `categorie`, `url_img`, `depositeur`) VALUES ('"+unTitre+"','"+uneCategorie+"','"+uneCategorie+"')";
             statement = conn.prepareStatement(requete);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+    
+    public ArrayList<String> getLastRessources(){
+        ArrayList<String> array= new ArrayList<String>();
+        try {
+            requete = "Select * from `ressources` ORDER BY id DESC LIMIT 1";
+            statement = conn.prepareStatement(requete);
+            rs = statement.executeQuery();
+            if (rs.next()) {
+                array.add(rs.getString("id"));
+                array.add(rs.getString("titre"));
+                array.add(rs.getString("date"));
+                array.add(rs.getString("categorie"));
+                array.add(rs.getString("url_img"));
+                array.add(rs.getString("depositeur"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            return array;
+        }
+    }
+    
+    public ArrayList<String> getListCategories(){
+        ArrayList<String> array= new ArrayList<String>();
+        try {
+            requete = "Select categorie from `ressources` GROUP BY categorie";
+            statement = conn.prepareStatement(requete);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                array.add(rs.getString("categorie"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            return array;
         }
     }
     

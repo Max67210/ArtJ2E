@@ -3,11 +3,24 @@
     <servlet>
         <servlet-name>ArtServlet</servlet-name>
         <servlet-class>ArtServlet</servlet-class>
+        <multipart-config>
+           <max-file-size>104857600</max-file-size>
+           <max-request-size>209715200</max-request-size>
+           <file-size-threshold>52428800</file-size-threshold>
+       </multipart-config>
     </servlet>
+<!--    <servlet>
+        <servlet-name>UploadFile</servlet-name>
+        <servlet-class>UploadFile</servlet-class>
+    </servlet>-->
     <servlet-mapping>
         <servlet-name>ArtServlet</servlet-name>
         <url-pattern>/servlet/ArtServlet</url-pattern>
     </servlet-mapping>
+<!--    <servlet-mapping>
+        <servlet-name>UploadFile</servlet-name>
+        <url-pattern>/servlet/UploadFile</url-pattern>
+    </servlet-mapping>-->
     <welcome-file-list>
         <welcome-file>acceuil.jsp</welcome-file>
     </welcome-file-list>

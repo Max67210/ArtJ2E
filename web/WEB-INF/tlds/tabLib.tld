@@ -22,12 +22,17 @@
     -->
   <tag>
     <name>genreSelect</name>
-    <tag-class>tag.genreSelect</tag-class>
+    <tag-class>tag.GenreSelect</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
       <name>genre</name>
       <required>true</required>
       <type>java.lang.String</type>
     </attribute>
+  </tag>
+  <tag>
+    <name>LastPictureAdded</name>
+    <tag-class>tag.LastPictureAdded</tag-class>
+    <body-content>scriptless</body-content>
   </tag>
 </taglib>
