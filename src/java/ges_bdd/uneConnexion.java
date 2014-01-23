@@ -38,12 +38,12 @@ public class uneConnexion{
     }
     // Méthode qui retourne l'instance et crée une connexion si elle n'existe pas.
     public static Connection getInstance(){
-        if(connect == null){
+//        if(connect == null){
             new uneConnexion();
 //            System.out.println("Instanciation de la connexion avec la base SQL ...");
-        }else{
-//            System.out.println("Connexion Sql déjà existante");
-        }
+//        }else{
+////            System.out.println("Connexion Sql déjà existante");
+//        }
         return connect;
     }
 }
