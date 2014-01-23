@@ -5,7 +5,9 @@
  */
 package tag;
 
+import ges_bdd.Connexion;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.jsp.JspWriter;
@@ -31,31 +33,30 @@ public class GenreSelect extends SimpleTagSupport {
     public void doTag() throws JspException {
         try {
             JspWriter out = getJspContext().getOut();
+            Connexion connect = new Connexion(); // instanciation et ouverture de la base de donnée.
+            ArrayList<String> array = new ArrayList<String>();
+            array = connect.getListCategories();
             if ("select".equals(this.genre)) {
                 htmlOut = "<ul>\n"
-                        + "                <form action=\"servlet/resultat\" method=\"post\">\n"
-                        + "                    <select name=\"categorie\">\n"
-                        + "                        <option>Dark-Fantasy</option>\n"
-                        + "                        <option>Humain</option>\n"
-                        + "                        <option>Delorien</option>\n"
-                        + "                        <option>Akwalien</option>\n"
-                        + "                        <option>Elarien</option>\n"
-                        + "                        <option>Paysage-Fantasy</option>\n"
-                        + "                    </select>\n"
-                        + "                    <input type=\"submit\" value=\"GO!\"/>\n"
-                        + "                </form>\n"
-                        + "            </ul>";
+                        + "   <form action=\"servlet/resultat\" method=\"post\">\n"
+                        + "     <select name=\"categorie\">\n";
+                            for(int i = 0 ; i < array.size() ; i++){ // Listing de toutes les categorie
+                              htmlOut+="<option value=\""+array.get(i)+"\">"+array.get(i)+"</option>";  
+                            }
+                
+                htmlOut+= "  </select>\n"
+                        + "   <input type=\"submit\" value=\"GO!\"/>\n"
+                        + "  </form>\n"
+                        + "</ul>";
+                
             } else if ("check".equals(this.genre)) {
                 htmlOut = "<ul>\n"
-                        + "                <form action=\"servlet/resultat\" method=\"post\">\n"
-                        + "<input type=\"radio\" name=\"cat\" value=\"Dark-Fantasy\">Dark-Fantasy<br>\n"
-                        + "<input type=\"radio\" name=\"cat\" value=\"Humain\">Humain<br>\n"
-                        + "<input type=\"radio\" name=\"cat\" value=\"Delorien\">Delorien<br>\n"
-                        + "<input type=\"radio\" name=\"cat\" value=\"Akwalien\">Akwalien<br>\n"
-                        + "<input type=\"radio\" name=\"cat\" value=\"Elarien\">Elarien<br>\n"
-                        + "<input type=\"radio\" name=\"cat\" value=\"Paysage-Fantasy\">Paysage-Fantasy<br>\n"
-                        + "                </form>\n"
-                        + "            </ul>";
+                        + "  <form action=\"servlet/resultat\" method=\"post\">\n";
+                        for(int i = 0 ; i < array.size() ; i++){ // Listing de toutes les categorie
+                            htmlOut+="<input type=\"radio\" name=\"categorie\" value=\""+array.get(i)+"\">"+array.get(i)+"<br>";
+                          }
+                htmlOut += "  </form>\n"
+                        + "</ul>";
             } else {
                 htmlOut = "pas de selection";
             }
