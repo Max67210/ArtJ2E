@@ -19,7 +19,7 @@
             <h3>Navigation</h3>
             <div class="separator_nav" ></div>
             <p> recherche une catégorie</p>
-            <tag:genreSelect genre="select"/>
+            <tag:genreSelect genre="check"/>
             
             <div class="separator_nav" ></div>
             <ul>

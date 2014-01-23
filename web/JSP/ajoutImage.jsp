@@ -12,7 +12,7 @@
     <div id="div_img_ajout"><img id="img_insc_ajout" src="pictures/exit.png" /></div>
     <h3>DDL Image</h3>
     Selection de l'image à ajouter <br />
-    <form action="servlet/ArtServlet" method="post">
+    <form action="servlet/ArtServlet" method="post" enctype="multipart/form-data">
         <input type="file" name="file" />
         <br />
         Nom de l'image : <input type="text" name="nomImage"/> <br/>

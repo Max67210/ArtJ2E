@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="tag" uri="/WEB-INF/tlds/tabLib.tld" %>
 <!DOCTYPE html>
 
 <!-- LA DIV MAIN -->
 <div id="div_main">
-    <p>Contenu</p>
+    <tag:LastPictureAdded />
 </div>
