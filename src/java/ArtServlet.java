@@ -22,7 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class ArtServlet extends HttpServlet {
     
-    public ArrayList<String> listNomsImagesDownload = new ArrayList<String>();
+    public static ArrayList<String> listNomsImagesDownload = new ArrayList<String>();
     
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
