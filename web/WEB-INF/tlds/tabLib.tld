@@ -35,4 +35,9 @@
     <tag-class>tag.LastPictureAdded</tag-class>
     <body-content>scriptless</body-content>
   </tag>
+  <tag>
+    <name>PictureParCategorie</name>
+    <tag-class>tag.PictureParCategorie</tag-class>
+    <body-content>scriptless</body-content>
+  </tag>
 </taglib>

@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class ArtServlet extends HttpServlet {
-
+    
+    public ArrayList<String> listNomsImagesDownload = new ArrayList<String>();
+    
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
@@ -105,7 +108,19 @@ public class ArtServlet extends HttpServlet {
                     } else {
                         out.print("Login/mot de passe incorrect");
                     }
-                } else {
+                } else if (formulaire_origine.equals("EnregistrementPanier")) {
+                    
+                    try {
+                        String[] choix = request.getParameterValues("ImagesSelect" ); 
+                        for (int i = 0; i < choix.length; ++i){ 
+                             listNomsImagesDownload.add(choix[i]);
+                        } 
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                
+                else {
                     out.print("variable passer:" + formulaire_origine);
                 }
 //             state.close();

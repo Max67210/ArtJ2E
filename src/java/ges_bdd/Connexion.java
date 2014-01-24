@@ -4,6 +4,7 @@
  */
 package ges_bdd;
 
+import images.Images;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class Connexion {
     private PreparedStatement statement;
     private ResultSet rs;
     private boolean btrouver =false;
+    public static ArrayList<Images> listImagesCateg =  new ArrayList<Images>();
 
     public Connexion() {
         try {
@@ -128,5 +130,18 @@ public class Connexion {
         } finally {
             return existe;
         }
+    }
+    
+    public void RecupImageParCategorie (String uneCategorie)  {
+            try {
+                requete = "SELECT * FROM `ressources` WHERE categorie='"+uneCategorie+"'";
+                statement = conn.prepareStatement(requete);
+                rs = statement.executeQuery();
+                while (rs.next()) {
+                    listImagesCateg.add(new Images(rs.getInt("id"),rs.getString("titre"), rs.getString("date"),rs.getString("categorie"), rs.getString("url_img"), rs.getString("depositeur")));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace(); 
+            }
     }
 }

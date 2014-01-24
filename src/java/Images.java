@@ -7,12 +7,22 @@ public class Images {
     
     private Integer id;
     private String titre = "";
-    private Date date;
+    private String date;
     private String categorie = "";
-    private Blob img;
+    private String urlImg;
+    private String depositeur ="";
     
     public Images() {
-    }    
+    }
+    
+    public Images(Integer unID, String unTitre, String uneDate, String uneCategorie, String unURL, String unDepositeur) {
+        this.id = unID;
+        this.titre = unTitre;
+        this.date = uneDate;
+        this.categorie = uneCategorie;
+        this.urlImg = unURL;
+        this.depositeur = unDepositeur;
+    }
 
     public Integer getId() {
         return id;
@@ -34,16 +44,24 @@ public class Images {
         this.categorie = categorie;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Blob getImg() {
-        return img;
+    public String getUrlImg() {
+        return urlImg;
     }
 
-    public void setImg(Blob img) {
-        this.img = img;
+    public void setUrlImg(String img) {
+        this.urlImg = img;
+    }
+    
+    public String getDepositeur() {
+        return depositeur;
+    }
+
+    public void setDepositeur(String unDepositeur) {
+        this.depositeur = unDepositeur;
     }
     
 }
