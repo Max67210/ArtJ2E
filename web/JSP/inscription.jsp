@@ -8,6 +8,7 @@ action="servlet/ArtServlet" method="post"
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<link rel="stylesheet" type="text/css" href="css/inscription.css">
 <script type="text/javascript" src="JS/inscription.js"></script>
 <!-- L'INSCRIPTION -->
 <div id="div_form_inscription" class="non_active_inscripton">

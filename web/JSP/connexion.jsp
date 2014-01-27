@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-
+<link rel="stylesheet" type="text/css" href="css/connexion.css">
 <script type="text/javascript" src="JS/connexion.js"></script>
 <!-- LA CONNEXION -->
 <div id="div_form_connexion" class="non_active_connexion">
@@ -22,9 +22,14 @@
                 <td> <label for="mdp_connexion">mot de passe:</label></td>
                 <td><input type="password" id="mdp_connexion" name="mdp_connexion" placeholder="entrez votre mot de passe"/></td>
             </tr>
+            <tr>
+                <td>
+                    <p id="error_conn"></p>
+                </td>
+            </tr>
         </table>
         </br>
         <input type="hidden" name="div_type_form" value="connexion">
-        <input type="submit" value="connexion"/>
+        <input type="submit" id="btn_submit_conn" value="connexion"/>
     </form>
 </div>

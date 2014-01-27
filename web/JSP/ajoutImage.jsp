@@ -5,7 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="tag" uri="/WEB-INF/tlds/tabLib.tld" %>
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="css/ajoutImage.css">
 <script type="text/javascript" src="JS/ajout_image.js"></script>
 <!-- Ajout d'image -->
 <div id="div_form_ajout_image" class="non_active_inscripton">
@@ -15,15 +17,8 @@
     <form action="servlet/ArtServlet" method="post" enctype="multipart/form-data">
         <input type="file" name="file" />
         <br />
-        Nom de l'image : <input type="text" name="nomImage"/> <br/>
-        <select name="categorie">
-            <option>Dark-Fantasy</option>
-            <option>Humain</option>
-            <option>Delorien</option>
-            <option>Akwalien</option>
-            <option>Elarien</option>
-            <option>Paysage-Fantasy</option>
-        </select>
+        Nom de l'image : <input type="text" id="nomImage" name="nomImage"/> <br/>
+        <tag:genreSelect genre="selectAddImg" />
         <input type="hidden" name="div_type_form" value="ajout_image">
         <input type="submit" value="Ajouter" />
     </form>

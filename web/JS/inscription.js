@@ -6,12 +6,19 @@ $(document).ready(function() {
 
     $("#link_enregistrement").click(function() {
         $("#div_form_inscription").css("z-index", "3");
+        $("#div_form_connexion").css("z-index", "-3");
+        $("#Login_insc").val('');
+        $("#mdp_insc").val('');
+        $("#Login_connexion").val('');
+        $("#mdp_connexion").val('');
     });
 
     $("#img_insc").click(function() {
         $("#div_form_inscription").css("z-index", "-3");
         $("#Login_insc").val('');
-        $("#password").val('');
+        $("#mdp_insc").val('');
+        $("#Login_connexion").val('');
+        $("#mdp_connexion").val('');
     });
 
 
@@ -69,24 +76,33 @@ $(document).ready(function() {
             $("#btn_submit").attr('value', 'Merci de remplir les champs');
         }
     };
-
     $('#btn_submit').on('click', function() {
-        alert('ddz');
+//        alert('ddz');
         $.ajax({
             type: "POST",
             url: "servlet/ArtServlet",
             data: {
                 login: $("#Login_insc").val(),
-                pass:  $("#mdp_insc").val(),
+                pass: $("#mdp_insc").val(),
                 div_type_form: "inscription"
             },
             success: function(data)
-           {
-               $("#error_insc").text(data);
-           }
+            {
+                if(data.startsWith("Connecté")){
+//                    alert("Bienvenue parmis nous "+ data+"!");
+                    $("#div_form_inscription").css("z-index", "-3");
+                    $("#div_head_general").html("<p>"+data+"</p>");
+                }else{
+                    $("#error_insc").text(data);
+                }
+            }
         });
         return false;
     });
     
+    String.prototype.startsWith = function(prefix) {
+        return this.indexOf(prefix) === 0;
+    }
+
 });
   

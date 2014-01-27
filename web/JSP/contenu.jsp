@@ -10,7 +10,8 @@
 
 <!-- LA DIV MAIN -->
 <div id="div_main">
-    <%--<tag:LastPictureAdded />--%>
-    <tag:PictureParCategorie />
+    <tag:LastPictureAdded />
+    <%--<tag:PictureParCategorie />--%>
+
     
 </div>

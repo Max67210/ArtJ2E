@@ -1,0 +1,46 @@
+#div_form_connexion{
+    /*   display: none;*/
+   border-radius: 10px;
+   position:absolute;
+   top:50%;
+   left:50%;
+   margin-left:-150px; /* -largeur/2 */
+   margin-top:-100px; /* -hauteur/2 */
+   text-align: center;
+   background-color: #BFC4BE;
+   border: 10px solid black;
+   background-size:100% 100%;
+   z-index: -2;
+}
+
+#div_form_connexion img{
+   width: 15px;
+   height: 15px;
+   margin-right: 10%;
+   margin-top: 5%;
+}
+#div_img{
+   text-align: right;
+}
+
+#div_form_connexion img:hover{
+    cursor:pointer;
+}
+
+#div_form_connexion form{
+    margin: 30px;
+}
+#div_form_connexion input{
+     width: 180px;
+}
+
+#div_form_connexion table
+{
+   text-align: left;
+   font-weight: bold;
+}
+#div_form_connexion table td
+{
+   padding-left: 5px;
+   padding-right: 5px;
+}

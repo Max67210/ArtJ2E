@@ -1,19 +1,19 @@
-<%-- 
-    Document   : panier
-    Created on : 24 janv. 2014, 15:12:57
-    Author     : Mexios
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@ page import="java.util.List" %>
         <title>JSP Page</title>
     </head>
     <body>
+        <div id="div_main">
         <% 
-         if (ArtServlet.listNomsImagesDownload == null) {
+         ArrayList<Images> listPanier = new ArrayList<Images>();
+         listPanier = (ArrayList) session.getAttribute("listNomsImagesDownload");
+         if (listPanier == null) {
              String str = "Votre panier est vide !";
          }
          else {
@@ -28,7 +28,7 @@
                     <%
              int i = 0;
              String html= "";
-             for (String imageSelect : ArtServlet.listNomsImagesDownload) {
+             for (String imageSelect : listPanier) {
             html += "<TR>"
                     + "<TD>" +i+"</TD>"
                     + "<TD>" +imageSelect+ "</TD>"
@@ -41,6 +41,6 @@
         <input type="submit" value="Telecharger les images du panier"/>
          }
         %>
-        
+        </div>
     </body>
 </html>

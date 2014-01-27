@@ -6,12 +6,23 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<link rel="stylesheet" type="text/css" href="css/header.css">
 <!-- LE HEADER -->
 <div id="div_head_general">
     <ul>
-        <li><a id="link_connexion">Login</a></li>
+        <%
+            if (session.getAttribute("loginUser") != null && !"".equals(session.getAttribute("loginUser").toString())) {
+                %>
+                <p><% out.print("Connecté en tant que: "+session.getAttribute("loginUser").toString());%></p>
+                <%
+            }else{
+                %>
+                <li><a id="link_connexion">Login</a></li>
         <li><a id="link_enregistrement">Enregistrement</a></li>
+        <li><a href="/ArtJ2E/panier.jsp">Panier</a></li>
+                <%
+            }
+            %>
     </ul>
 </div>
 

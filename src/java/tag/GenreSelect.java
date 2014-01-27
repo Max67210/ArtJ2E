@@ -37,27 +37,38 @@ public class GenreSelect extends SimpleTagSupport {
             ArrayList<String> array = new ArrayList<String>();
             array = connect.getListCategories();
             if ("select".equals(this.genre)) {
-                htmlOut = "<ul>\n"
-                        + "   <form action=\"servlet/resultat\" method=\"post\">\n"
-                        + "     <select name=\"categorie\">\n";
+                htmlOut = "<script type=\"text/javascript\" src=\"JS/rechercheImageCatSelect.js\"></script>"
+                        + "<ul>\n"
+                        + "   <form id=\rechercheImg\" name=\"rechercheImg\">\n"
+                        + "     <select id=\"selectRechercheCat\" name=\"categorie\">\n";
                             for(int i = 0 ; i < array.size() ; i++){ // Listing de toutes les categorie
                               htmlOut+="<option value=\""+array.get(i)+"\">"+array.get(i)+"</option>";  
                             }
                 
                 htmlOut+= "  </select>\n"
-                        + "   <input type=\"submit\" value=\"GO!\"/>\n"
                         + "  </form>\n"
                         + "</ul>";
                 
             } else if ("check".equals(this.genre)) {
-                htmlOut = "<ul>\n"
-                        + "  <form action=\"servlet/resultat\" method=\"post\">\n";
+                htmlOut = "<script type=\"text/javascript\" src=\"JS/rechercheImageCatCheck.js\"></script>"
+                        + "<ul>\n"
+                        + "  <form id=\rechercheImg\" name=\"rechercheImg\">\n";
                         for(int i = 0 ; i < array.size() ; i++){ // Listing de toutes les categorie
-                            htmlOut+="<input type=\"radio\" name=\"categorie\" value=\""+array.get(i)+"\">"+array.get(i)+"<br>";
+                            htmlOut+="<input type=\"radio\" class=\"rd_btn_rech\" name=\"categorie\" value=\""+array.get(i)+"\">"+array.get(i)+"<br>";
                           }
+
                 htmlOut += "  </form>\n"
                         + "</ul>";
-            } else {
+            } else if("selectAddImg".equals(this.genre)){
+                htmlOut = 
+                        "     <select id=\"selectAddImg\" name=\"categorie\">\n";
+                            for(int i = 0 ; i < array.size() ; i++){ // Listing de toutes les categorie
+                              htmlOut+="<option value=\""+array.get(i)+"\">"+array.get(i)+"</option>";  
+                            }
+                
+                htmlOut+= "  </select>\n";
+            }
+            else {
                 htmlOut = "pas de selection";
             }
             out.println(htmlOut);
