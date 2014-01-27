@@ -41,11 +41,11 @@ public class Connexion {
 
     public void ajouterRessource(String unTitre, String uneCategorie, String url, String deposit) {
         try {
-            requete = "INSERT INTO `ressources` (`titre`, `categorie`, `url_img`, `depositeur`) VALUES ('"+unTitre+"','"+uneCategorie+"','"+uneCategorie+"')";
+            requete = "INSERT INTO `ressources` (`titre`, `categorie`, `url_img`, `depositeur`) VALUES ('"+unTitre+"','"+uneCategorie+"','"+url+"','"+deposit+"')";
             statement = conn.prepareStatement(requete);
             statement.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.out.println("erreur ajout ressource SQL");
         }
     }
     

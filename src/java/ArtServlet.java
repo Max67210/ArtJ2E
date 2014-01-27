@@ -58,12 +58,12 @@ public class ArtServlet extends HttpServlet {
                 List<FileItem> formItems = upload.parseRequest(request);
                 out.println("contenur requets parse: " + upload.parseRequest(request) + " \n");
                 if (formItems != null && formItems.size() > 0) {
-                    String fileName = "";
-                    String titre = "";
+                    String fileName="";
+                    String titre="";
                     String cate = "";
-                    String hidden = "";
-
-                    String cat = "";
+                    String hidden ="";
+                    
+                    String cat="";
                     // iterates over form's fields
                     out.println("dans le if item\n");
                     for (FileItem item : formItems) { // 1 => file 2=> titre 3=> catergorie 4=> hidden
@@ -73,34 +73,34 @@ public class ArtServlet extends HttpServlet {
                             String filePath = uploadPath + File.separator + fileName;
                             out.println(filePath + "\n");
                             out.println(fileName);
-
+                            
                             File storeFile = new File(filePath);
-
+                           
                             // saves the file on disk
                             item.write(storeFile);
 
-                        } else {
-                            if ("nomImage".equals(item.getFieldName())) {
+                        }else{
+                            if("nomImage".equals(item.getFieldName())){
                                 titre = item.getString();
-                            } else if ("categorie".equals(item.getFieldName())) {
+                            }else if("categorie".equals(item.getFieldName())){
                                 cate = item.getString();
-                            } else if ("div_type_form".equals(item.getFieldName())) {
+                            }else if("div_type_form".equals(item.getFieldName())){
                                 hidden = item.getString();
                             }
                         }
-
+                        
                     }
-                    out.println("titre " + titre);
-                    out.println("cat " + cate);
-                    out.println("hid " + hidden);
+                    out.println("titre "+titre);
+                    out.println("cat "+cate);
+                    out.println("hid "+hidden);
                     Connexion connect = new Connexion(); // instanciation et ouverture de la base de donnée.
-                    String depositaire = "";
-                    if (session.getAttribute("loginUser") != null && !"".equals(session.getAttribute("loginUser").toString())) {
-                        depositaire = session.getAttribute("loginUser").toString();
-                    } else {
-                        depositaire = "inconnu";
+                    String depositaire ="";
+                    if(session.getAttribute("loginUser")!=null && !"".equals(session.getAttribute("loginUser").toString())){
+                        depositaire =session.getAttribute("loginUser").toString();
+                    }else{
+                        depositaire="inconnu";
                     }
-                    connect.ajouterRessource(titre, cate, fileName, depositaire);
+                    connect.ajouterRessource(titre,cate, fileName,depositaire);
                     response.sendRedirect("/ArtJ2E/acceuil.jsp");
                 }
             } catch (Exception ex) {
