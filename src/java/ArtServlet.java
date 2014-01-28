@@ -58,12 +58,12 @@ public class ArtServlet extends HttpServlet {
                 List<FileItem> formItems = upload.parseRequest(request);
                 out.println("contenur requets parse: " + upload.parseRequest(request) + " \n");
                 if (formItems != null && formItems.size() > 0) {
-                    String fileName="";
-                    String titre="";
+                    String fileName = "";
+                    String titre = "";
                     String cate = "";
-                    String hidden ="";
-                    
-                    String cat="";
+                    String hidden = "";
+
+                    String cat = "";
                     // iterates over form's fields
                     out.println("dans le if item\n");
                     for (FileItem item : formItems) { // 1 => file 2=> titre 3=> catergorie 4=> hidden
@@ -73,34 +73,34 @@ public class ArtServlet extends HttpServlet {
                             String filePath = uploadPath + File.separator + fileName;
                             out.println(filePath + "\n");
                             out.println(fileName);
-                            
+
                             File storeFile = new File(filePath);
-                           
+
                             // saves the file on disk
                             item.write(storeFile);
 
-                        }else{
-                            if("nomImage".equals(item.getFieldName())){
+                        } else {
+                            if ("nomImage".equals(item.getFieldName())) {
                                 titre = item.getString();
-                            }else if("categorie".equals(item.getFieldName())){
+                            } else if ("categorie".equals(item.getFieldName())) {
                                 cate = item.getString();
-                            }else if("div_type_form".equals(item.getFieldName())){
+                            } else if ("div_type_form".equals(item.getFieldName())) {
                                 hidden = item.getString();
                             }
                         }
-                        
+
                     }
-                    out.println("titre "+titre);
-                    out.println("cat "+cate);
-                    out.println("hid "+hidden);
+                    out.println("titre " + titre);
+                    out.println("cat " + cate);
+                    out.println("hid " + hidden);
                     Connexion connect = new Connexion(); // instanciation et ouverture de la base de donnée.
-                    String depositaire ="";
-                    if(session.getAttribute("loginUser")!=null && !"".equals(session.getAttribute("loginUser").toString())){
-                        depositaire =session.getAttribute("loginUser").toString();
-                    }else{
-                        depositaire="inconnu";
+                    String depositaire = "";
+                    if (session.getAttribute("loginUser") != null && !"".equals(session.getAttribute("loginUser").toString())) {
+                        depositaire = session.getAttribute("loginUser").toString();
+                    } else {
+                        depositaire = "inconnu";
                     }
-                    connect.ajouterRessource(titre,cate, fileName,depositaire);
+                    connect.ajouterRessource(titre, cate, fileName, depositaire);
                     response.sendRedirect("/ArtJ2E/acceuil.jsp");
                 }
             } catch (Exception ex) {
@@ -143,63 +143,72 @@ public class ArtServlet extends HttpServlet {
                     }
                 } else if (formulaire_origine.equals("EnregistrementPanier")) {
                     String str = "";
-//                    try {
-                        String[] choix = request.getParameterValues("ImagesSelect");
-                        for (int i = 0; i < choix.length; ++i) {
-                            listNomsImagesDownload.add(choix[i]);
-                        }
-                        String html="";
-                         for (int i = 0; i < listNomsImagesDownload.size();i++) {
-                             html += listNomsImagesDownload.get(i);
-                         }
-                         out.print(html);
+                    String[] choix = request.getParameterValues("ImagesSelect");
+                    for (int i = 0; i < choix.length; ++i) {
+                        listNomsImagesDownload.add(choix[i]);
+                    }
+                    String html = "";
 //                        session.setAttribute("listNomsImagesDownload", listNomsImagesDownload);
-//                        response.sendRedirect("/ArtJ2E/acceuil.jsp"); 
-                        
-//                        } else {
-//                            str = " <TABLE BORDER=\"1\">"
-//                                    + " <CAPTION> Votre panier </CAPTION>"
-//                                    + " <TR>"
-//                                    + " <TH> Numero </TH>"
-//                                    + " <TH> Nom Image </TH>"
-//                                    + " <TH> Supprimer </TH>"
-//                                    + " </TR>";
-//                            int i = 0;
-//                            String html = "";
-//                            for (String imageSelect : listNomsImagesDownload) {
-//                                str += "<TR>"
-//                                        + "<TD>" + i + "</TD>"
-//                                        + "<TD>" + imageSelect + "</TD>"
-//                                        + "<TD> <input type='checkbox' name='panier' value='" + imageSelect + "'>" + imageSelect + " </TD>"
-//                                        + "</TR>";
-//                                i++;
-//                            }
-//                            str += "</br></br><input type=\"submit\" value=\"Supprimer Images Selectionnées\" />"
-//                                    + "<input type=\"submit\" value=\"Telecharger au format Zip\" />";
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    } finally {
-//                        out.print(str);
-//                    }
-                } else if (formulaire_origine.equals("rechercheCategor")) {
+                    response.sendRedirect("/ArtJ2E/acceuil.jsp");
+                } else if (formulaire_origine.equals("panier")) {
+                    String str = "";
+                    try {
+                        str = " <script type=\"text/javascript\" src=\"JS/panier.js\"></script>"
+                                + "<form id=\"panier\" action=\"servlet/ArtServlet\" method=\"post\">"
+                                + "<TABLE BORDER=\"1\">"
+                                + " <CAPTION> Votre panier </CAPTION>"
+                                + " <TR>"
+                                + " <TH> Numero </TH>"
+                                + " <TH> Nom Image </TH>"
+                                + " <TH> Supprimer </TH>"
+                                + " </TR>";
+                        int i = 0;
+                        for (String imageSelect : listNomsImagesDownload) {
+                            str += "<TR>"
+                                    + "<TD>" + i + "</TD>"
+                                    + "<TD>" + imageSelect + "</TD>"
+                                    + "<TD> <input type='checkbox' name='panier' value='" + imageSelect + "'>" + imageSelect + " </TD>"
+                                    + "</TR>";
+                            i++;
+                        }
+                        str += " <input type=\"hidden\" name=\"div_type_form\" value=\"TelechargementPanier\">"
+                                + "<input type=\"submit\" value=\"Telecharger au format Zip\" />"
+                                + "</form>";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        out.print(str);
+                    }
+                } else if (formulaire_origine.equals("TelechargementPanier")) { 
+                    try {
+                        ZipFileWritter zip = new ZipFileWritter("c://images.zip");
+                        for (String imageSelect : Connexion.listPanierUrl) {
+                            String file =  "pictures/"+connect.RecupUrlImg(imageSelect);
+                            out.print(file);
+                            zip.addFile(file);
+                        }
+                        zip.close();
+                        response.sendRedirect("/ArtJ2E/acceuil.jsp");
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+                }
+                else if (formulaire_origine.equals("rechercheCategor")) {
                     connect.RecupImageParCategorie(request.getParameter("categor"));
                     String htmlOut = "<h1>Bienvenue sur ArtJ2E!</h1></br></br>";
-                    for (images.Images uneImage : Connexion.listImagesCateg)
-                    {
+                    for (images.Images uneImage : Connexion.listImagesCateg) {
                         htmlOut += "<form id='formulaire_connexion' action='servlet/ArtServlet' method='post'>"
-                         +"<input type='checkbox' name='ImagesSelect' value="+uneImage.getTitre()+">"+uneImage.getTitre()+"<br>"
-                         +"<img src=\"pictures/"+uneImage.getUrlImg()+"\" alt=\""+uneImage.getTitre()+"\" title=\""+uneImage.getTitre()+"\">"
-                         +"<p>ajouter par "+uneImage.getDepositeur()+" déposé le "+uneImage.getDate()+" ayant pour titre "+uneImage.getTitre()+" (cat:"+uneImage.getCategorie()+")</p></br>";
+                                + "<input type='checkbox' name='ImagesSelect' value=" + uneImage.getTitre() + ">" + uneImage.getTitre() + "<br>"
+                                + "<img src=\"pictures/" + uneImage.getUrlImg() + "\" alt=\"" + uneImage.getTitre() + "\" title=\"" + uneImage.getTitre() + "\">"
+                                + "<p>ajouter par " + uneImage.getDepositeur() + " déposé le " + uneImage.getDate() + " ayant pour titre " + uneImage.getTitre() + " (cat:" + uneImage.getCategorie() + ")</p></br>";
                     }
-            htmlOut += "<input type='hidden' name=\"div_type_form\" value=\"EnregistrementPanier\"/>"
-                    + "<input type='submit' value='Enregistrer les images selectionnées'/>"
-                    + "</form>";
-                out.println(htmlOut);
-                Connexion.listImagesCateg.clear();
-                    
-                }
-                else {
+                    htmlOut += "<input type='hidden' name=\"div_type_form\" value=\"EnregistrementPanier\"/>"
+                            + "<input type='submit' value='Enregistrer les images selectionnées'/>"
+                            + "</form>";
+                    out.println(htmlOut);
+                    Connexion.listImagesCateg.clear();
+
+                } else {
                     out.print("variable passer:" + formulaire_origine);
                 }
 //             state.close();

@@ -23,8 +23,10 @@ public class Connexion {
     private String requete;
     private PreparedStatement statement;
     private ResultSet rs;
-    private boolean btrouver =false;
-    public static ArrayList<Images> listImagesCateg =  new ArrayList<Images>();
+    private boolean btrouver = false;
+    public static ArrayList<Images> listImagesCateg = new ArrayList<Images>();
+    public static ArrayList<String> listPanierUrl = new ArrayList<String>();
+    String url = null;
 
     public Connexion() {
         try {
@@ -34,23 +36,23 @@ public class Connexion {
             e.printStackTrace();
         }
     }
-    
+
     public void close() throws SQLException {
         conn.close();
     }
 
     public void ajouterRessource(String unTitre, String uneCategorie, String url, String deposit) {
         try {
-            requete = "INSERT INTO `ressources` (`titre`, `categorie`, `url_img`, `depositeur`) VALUES ('"+unTitre+"','"+uneCategorie+"','"+url+"','"+deposit+"')";
+            requete = "INSERT INTO `ressources` (`titre`, `categorie`, `url_img`, `depositeur`) VALUES ('" + unTitre + "','" + uneCategorie + "','" + url + "','" + deposit + "')";
             statement = conn.prepareStatement(requete);
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("erreur ajout ressource SQL");
         }
     }
-    
-    public ArrayList<String> getLastRessources(){
-        ArrayList<String> array= new ArrayList<String>();
+
+    public ArrayList<String> getLastRessources() {
+        ArrayList<String> array = new ArrayList<String>();
         try {
             requete = "Select * from `ressources` ORDER BY id DESC LIMIT 1";
             statement = conn.prepareStatement(requete);
@@ -65,14 +67,13 @@ public class Connexion {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        finally{
+        } finally {
             return array;
         }
     }
-    
-    public ArrayList<String> getListCategories(){
-        ArrayList<String> array= new ArrayList<String>();
+
+    public ArrayList<String> getListCategories() {
+        ArrayList<String> array = new ArrayList<String>();
         try {
             requete = "Select categorie from `ressources` GROUP BY categorie";
             statement = conn.prepareStatement(requete);
@@ -82,25 +83,24 @@ public class Connexion {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        finally{
+        } finally {
             return array;
         }
     }
-    
-    public void inscriptionUserBDD (String unLogin, String unPassword) {
+
+    public void inscriptionUserBDD(String unLogin, String unPassword) {
         try {
-            requete = "INSERT INTO `user`(`userName`, `userPass`) VALUES ('"+unLogin+"','"+unPassword+"')";
+            requete = "INSERT INTO `user`(`userName`, `userPass`) VALUES ('" + unLogin + "','" + unPassword + "')";
             statement = conn.prepareStatement(requete);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
-    public boolean connexionUserBDD (String unLogin, String unPassword) {
+
+    public boolean connexionUserBDD(String unLogin, String unPassword) {
         try {
-            requete = "SELECT * FROM `user` WHERE userName='"+unLogin+"' AND userPass='"+unPassword+"'";
+            requete = "SELECT * FROM `user` WHERE userName='" + unLogin + "' AND userPass='" + unPassword + "'";
             statement = conn.prepareStatement(requete);
             rs = statement.executeQuery();
             if (rs != null) {
@@ -112,16 +112,16 @@ public class Connexion {
             return btrouver;
         }
     }
-    
-    public boolean userExiste(String unLogin){
+
+    public boolean userExiste(String unLogin) {
         boolean existe = false;
-         try {
-            requete = "SELECT COUNT(*) FROM `user` WHERE userName='"+unLogin+"'";
+        try {
+            requete = "SELECT COUNT(*) FROM `user` WHERE userName='" + unLogin + "'";
             statement = conn.prepareStatement(requete);
             rs = statement.executeQuery();
             if (rs.next()) {
-                int count =rs.getInt(1);
-                if(count > 0){
+                int count = rs.getInt(1);
+                if (count > 0) {
                     existe = true;
                 }
             }
@@ -131,17 +131,32 @@ public class Connexion {
             return existe;
         }
     }
-    
-    public void RecupImageParCategorie (String uneCategorie)  {
-            try {
-                requete = "SELECT * FROM `ressources` WHERE categorie='"+uneCategorie+"'";
-                statement = conn.prepareStatement(requete);
-                rs = statement.executeQuery();
-                while (rs.next()) {
-                    listImagesCateg.add(new Images(rs.getInt("id"),rs.getString("titre"), rs.getString("date"),rs.getString("categorie"), rs.getString("url_img"), rs.getString("depositeur")));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace(); 
+
+    public void RecupImageParCategorie(String uneCategorie) {
+        try {
+            requete = "SELECT * FROM `ressources` WHERE categorie='" + uneCategorie + "'";
+            statement = conn.prepareStatement(requete);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                listImagesCateg.add(new Images(rs.getInt("id"), rs.getString("titre"), rs.getString("date"), rs.getString("categorie"), rs.getString("url_img"), rs.getString("depositeur")));
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public String RecupUrlImg(String unTitre) {
+        try {
+            requete = "SELECT * FROM `ressources` WHERE titre='" + unTitre + "'";
+            statement = conn.prepareStatement(requete);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                listPanierUrl.add(rs.getString("url_img"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            return url;
+        }
     }
 }
